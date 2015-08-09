@@ -1,0 +1,7 @@
+header <- read.table('data//household_power_consumption.txt', nrows = 1, header = FALSE, sep =';', stringsAsFactors = FALSE)
+data <- read.csv("data//household_power_consumption.txt", skip=66636, nrows = 2880, sep = ';')
+colnames( data ) <- unlist(header)
+data$DateTime <- as.POSIXct(paste(data$Date, data$Time), format="%d/%m/%Y %H:%M:%S")
+with(data, plot(DateTime, Global_active_power, type='l', ylab = 'Global Active Power (kW)', xlab = ''))
+dev.copy(device = png, file = 'plot2.png', width = 480, height = 480)
+dev.off()
